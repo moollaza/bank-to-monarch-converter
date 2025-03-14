@@ -1,39 +1,39 @@
-export interface BankTransaction {
-  date: string;
-  transaction: string;
-  debit: number | null;
-  credit: number | null;
-  balance: number;
-  rawData: string[];
-}
-
-export interface ProcessedTransaction {
-  date: string;
-  merchant: string;
-  category: string;
-  account: string;
-  originalStatement: string;
-  notes: string;
-  amount: number;
-  tags: string;
-}
-
 export interface BalanceHistory {
-  date: string;
   account: string;
   balance: number;
+  date: string;
+}
+
+export interface BankTransaction {
+  balance: number;
+  credit: null | number;
+  date: string;
+  debit: null | number;
+  rawData: string[];
+  transaction: string;
 }
 
 export interface ColumnMapping {
-  date: number;
-  transaction: number;
-  debit: number;
-  credit: number;
   balance: number;
+  credit: number;
+  date: number;
+  debit: number;
+  transaction: number;
 }
 
 export interface ProcessedData {
-  rawTransactions: BankTransaction[];
-  columnMapping: ColumnMapping | null;
   accountName: string;
+  columnMapping: ColumnMapping | null;
+  rawTransactions: BankTransaction[];
+}
+
+export interface ProcessedTransaction {
+  account: string;
+  amount: number;
+  category: string;
+  date: string;
+  merchant: string;
+  notes: string;
+  originalStatement: string;
+  tags: string;
 }

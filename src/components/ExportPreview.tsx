@@ -1,23 +1,24 @@
-import React from 'react';
-import { Download, AlertCircle } from 'lucide-react';
-import { BankTransaction } from '../types';
+import { AlertCircle, Download } from "lucide-react";
+import React from "react";
+
+import { BankTransaction } from "../types";
 
 interface ExportPreviewProps {
-  title: string;
-  description: string;
-  onExport: () => void;
-  isExporting: boolean;
   data: BankTransaction[];
-  type: 'transactions' | 'balance';
+  description: string;
+  isExporting: boolean;
+  onExport: () => void;
+  title: string;
+  type: "balance" | "transactions";
 }
 
 export const ExportPreview: React.FC<ExportPreviewProps> = ({
-  title,
-  description,
-  onExport,
-  isExporting,
   data,
-  type
+  description,
+  isExporting,
+  onExport,
+  title,
+  type,
 }) => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -28,12 +29,12 @@ export const ExportPreview: React.FC<ExportPreviewProps> = ({
             <p className="text-sm text-gray-500 mt-1">{description}</p>
           </div>
           <button
-            onClick={onExport}
-            disabled={isExporting}
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed transition-colors duration-200"
+            disabled={isExporting}
+            onClick={onExport}
           >
             <Download className="h-4 w-4 mr-2" />
-            {isExporting ? 'Exporting...' : 'Export'}
+            {isExporting ? "Exporting..." : "Export"}
           </button>
         </div>
 
@@ -42,12 +43,13 @@ export const ExportPreview: React.FC<ExportPreviewProps> = ({
           {data.length > 0 ? (
             <div className="space-y-2">
               {data.slice(0, 3).map((item, index) => (
-                <div key={index} className="text-xs text-gray-600 font-mono bg-white p-2 rounded border border-gray-200">
-                  {type === 'transactions' ? (
-                    `${item.date},${item.transaction},${item.debit || item.credit}`
-                  ) : (
-                    `${item.date},${item.balance}`
-                  )}
+                <div
+                  className="text-xs text-gray-600 font-mono bg-white p-2 rounded border border-gray-200"
+                  key={index}
+                >
+                  {type === "transactions"
+                    ? `${item.date},${item.transaction},${item.debit || item.credit}`
+                    : `${item.date},${item.balance}`}
                 </div>
               ))}
             </div>
@@ -62,7 +64,7 @@ export const ExportPreview: React.FC<ExportPreviewProps> = ({
         <div className="text-xs text-gray-500">
           <p className="font-medium mb-1">File Format:</p>
           <ul className="list-disc list-inside space-y-1">
-            {type === 'transactions' ? (
+            {type === "transactions" ? (
               <>
                 <li>Date (YYYY-MM-DD)</li>
                 <li>Transaction Description</li>
