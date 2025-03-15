@@ -62,7 +62,7 @@ function App() {
     }
 
     const unmappedColumns = Object.entries(processedData.columnMapping)
-      .filter(([_, value]) => value === -1)
+      .filter(([, value]) => value === -1)
       .map(([key]) => key);
 
     if (unmappedColumns.length > 0) {
@@ -78,9 +78,9 @@ function App() {
       );
 
       if (type === "transactions") {
-        exportToCSV(transactions, "monarch_transactions.csv");
+        exportToCSV(transactions, "generated_monarch_transactions.csv");
       } else {
-        exportToCSV(balanceHistory, "monarch_balance_history.csv");
+        exportToCSV(balanceHistory, "generated_monarch_balance_history.csv");
       }
     } finally {
       setIsExporting(false);
@@ -117,7 +117,7 @@ function App() {
               <div className="lg:col-span-8">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                   <div className="p-6">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                       <div>
                         <h2 className="text-xl font-semibold text-gray-900">
                           Data Preview & Column Mapping
@@ -126,9 +126,9 @@ function App() {
                           Map your bank's columns to the required fields
                         </p>
                       </div>
-                      <div className="w-full sm:w-auto">
+                      <div className="w-full flex items-center">
                         <input
-                          className="w-full sm:w-auto px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           onChange={(e) =>
                             setProcessedData((prev) => ({
                               ...prev,
